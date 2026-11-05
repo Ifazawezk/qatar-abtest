@@ -1,0 +1,31 @@
+[project]
+name = "qatar-abtest"
+version = "0.1.0"
+description = "A/B test planning and analysis for experiments run in Qatar, plus paired comparison of two models on the same test cases"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Mohaned Elhagar" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "hijridate>=2.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "statsmodels>=0.14"]
+
+[project.scripts]
+qabtest = "qatar_abtest.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
