@@ -195,7 +195,7 @@ def cmd_analyze(args) -> int:
                 adj = welch_samples(c.adjusted_a, c.adjusted_b, args.alpha, args.revenue + " (CUPED)")
                 block.append(f"  {'':{len(args.revenue)}}  CUPED diff {adj.diff:+.2f} [{adj.diff_ci[0]:+.2f}, "
                              f"{adj.diff_ci[1]:+.2f}]  p {_p(adj.p_value)}  (r {c.rho:.2f}, variance "
-                             f"{-c.variance_reduction:+.0%}, CI {(adj.diff_ci[1] - adj.diff_ci[0]) / (w.diff_ci[1] - w.diff_ci[0]) - 1:+.0%} wide)")
+                             f"{-c.variance_reduction:+.0%}, interval {1 - (adj.diff_ci[1] - adj.diff_ci[0]) / (w.diff_ci[1] - w.diff_ci[0]):.0%} narrower)")
                 row["revenue_cuped"] = {**adj.to_dict(), "theta": c.theta, "rho": c.rho, "variance_reduction": c.variance_reduction}
                 primary = adj
             tests.append((name, args.revenue, primary.p_value, primary.statistic))
