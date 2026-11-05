@@ -91,7 +91,7 @@ def describe(name: str, start: dt.date, end: dt.date) -> Period:
     return p
 
 
-def _span(dates: list[str]) -> str:
+def span(dates: list[str]) -> str:
     return dates[0] if len(dates) == 1 else f"{dates[0]} to {dates[-1]}"
 
 
@@ -108,7 +108,7 @@ def warnings(test: Period, pre: Period | None = None) -> list[str]:
     elif test.ramadan_days == test.days:
         out.append(f"{test.name} is entirely in Ramadan; the effect may differ the rest of the year")
     for name, dates in test.special.items():
-        out.append(f"{name} falls in {test.name} ({_span(dates)})")
+        out.append(f"{name} falls in {test.name} ({span(dates)})")
     if test.days >= 14:
         half = test.start + dt.timedelta(days=test.days // 2 - 1)
         first, second = describe("the first half", test.start, half), describe("the second half", half + dt.timedelta(days=1), test.end)
